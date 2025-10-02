@@ -1,4 +1,4 @@
-import {  Info, ShoppingCartIcon} from "lucide-react";
+import {   ShoppingCartIcon} from "lucide-react";
 
 import { toast } from "sonner";
 import { useCartStore } from "@/store/cart";

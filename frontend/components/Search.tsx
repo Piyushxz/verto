@@ -1,4 +1,4 @@
-import { SearchIcon, SlidersHorizontalIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 export const Search = () => {
 
