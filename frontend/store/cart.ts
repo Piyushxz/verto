@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 type CartItem = {
   id: string | number;
@@ -19,7 +20,7 @@ type CartState = {
   toggleCart: (open?: boolean) => void;
 };
 
-export const useCartStore = create<CartState>((set, get) => ({
+export const useCartStore = create<CartState>()(persist((set, get) => ({
   items: [],
   isOpen: false,
   addItem: (item, qty = 1) => {
@@ -50,6 +51,9 @@ export const useCartStore = create<CartState>((set, get) => ({
     }),
   toggleCart: (open) =>
     set((state) => ({ isOpen: typeof open === "boolean" ? open : !state.isOpen })),
+}), {
+  name: "cart-store",
+  storage: createJSONStorage(() => (typeof window !== 'undefined' ? window.localStorage : undefined as any)),
 }));
 
 export const selectCount = (s: CartState) =>
