@@ -27,23 +27,26 @@ app.post('/api/orders', (req, res) => {
          return
     }
     
-    console.log('New Order Received:', {
+    console.log('New Order Received', {
         items: items
     })
     
     let total = 0
+    let orderedProducts : any =[]
     items.forEach((item:any) => {
         const product = products.find(p => p.id === item.productId)
         if (product) {
             total += product.price * item.quantity
+            orderedProducts.push(product)
         }
     })
+    console.log('Order Total ' + total)
     
-    console.log('Order Total: ' + total.toFixed(2))
-    
-    res.json({ 
+    res.status(200).json({ 
         success: true, 
         message: 'Order processed successfully',
+        total,
+        items:orderedProducts,
         orderId: Date.now() 
     })
 })
