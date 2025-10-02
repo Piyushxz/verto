@@ -1,14 +1,15 @@
 import {  Info, ShoppingCartIcon} from "lucide-react";
 
 import { toast } from "sonner";
+import { useCartStore } from "@/store/cart";
 
 export const Card = (props: {
     img: string;
     name: string;
-    cost: string;
-    id: string;
+    cost: number;
+    id: number;
 }) => {
- 
+ const addItem = useCartStore((s)=>s.addItem)
 
     return (
         <div className="relative font-primary tracking-tighter w-80 h-auto rounded-lg shadow-lg transition-transform duration-200 transform hover:scale-105 bg-background h-[400px]">
@@ -30,6 +31,8 @@ export const Card = (props: {
         <button
             className="cursor-pointer  py-2 px-4 bg-yellow-400 flex items-center gap-2 rounded-lg shadow-md focus:outline-none"
             onClick={() => {
+                toast.success("Added to cart")
+                addItem({ id: props.id, name: props.name, img: props.img, price: props.cost }, 1)
             }}
         >
             <ShoppingCartIcon className="text-white size-4" />

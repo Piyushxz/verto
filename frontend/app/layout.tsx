@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { CartDrawer } from "@/components/CartDrawer";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +19,8 @@ export default function RootLayout({
         className={`font-satoshi  antialiased`}
       >
         {children}
+        <CartDrawer/>
+        <Toaster richColors position="top-center"/>
       </body>
     </html>
   );
