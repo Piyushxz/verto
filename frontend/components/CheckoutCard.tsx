@@ -4,6 +4,7 @@ import { CheckoutCardItem } from "./CheckoutCardItem";
 import { toast } from "sonner";
 import { useCartStore, selectTotal } from "@/store/cart";
 import axios from "axios";
+import { API_BASE_URL } from "@/config";
 import { useState } from "react";
 
 export const CheckoutCard = () => {
@@ -21,7 +22,7 @@ export const CheckoutCard = () => {
     }
     try{
       const payload = { items: items.map(i=>({ productId: i.id, quantity: i.quantity })) }
-      const res = await axios.post('http://localhost:5000/api/orders', payload)
+      const res = await axios.post(`${API_BASE_URL}/api/orders`, payload)
       console.log(res)
       if(res.status === 200){
         toast.success("Order placed")

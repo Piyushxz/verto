@@ -3,6 +3,7 @@ import { Card } from "@/components/Card";
 import { Navbar } from "@/components/Navbar";
 import { Search } from "@/components/Search";
 import axios from "axios";
+import { API_BASE_URL } from "@/config";
 import { useEffect, useState } from "react";
 
 export default function(){
@@ -10,7 +11,7 @@ export default function(){
     
     async function getProducts(){
         try{
-            const response = await axios.get('http://localhost:5000/api/products')
+            const response = await axios.get(`${API_BASE_URL}/api/products`)
             console.log(response.data)
             setProducts(response.data)
         }catch(err){
